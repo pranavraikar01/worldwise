@@ -1,0 +1,102 @@
+//In react instaed of using anchor tag for page navigation we use <Link> tag or <NavLink> tag because if we use anchor tag and click on the link to which we have to redirect ,we can go to the new link but the page reloads
+
+
+
+
+//Using css modules we create one css file per component because it keeps the single pages styling isolated from other single pages  for that create PageNav.module.css in the folder  where the jsx file to which we have to add css is present then import the .module.css file in the file where jsx is present 
+eg:-import styles from "./PageNav.module.css";
+thus we can use the css classes in our jsx but this time while using them syntax is:-
+eg:<nav className={styles.nav}>
+
+
+//NOTE:
+1.We can also add global css file which acts as a global styling for all pages
+2.We can also use the css from components globally in other pages file 
+for that in the .module.css file for the class to be global we must  write it as :-eg:
+:global(.test){
+    background-color:red
+}
+but whule using this class in other pages the syntax is like previous eg:
+<nav className="test">
+This 2nd note is mainly used when we work on active classes which depend on other pages to be active
+
+
+
+//When we want to show a route for  component on the same page i.e when we want to not go to a different page but infact we want to just create a new link i.e nested link for a component to remain on the same page then we create nested routes 
+For that we have to first create child routes for te parent route in tha App.jsx 
+eg:
+<Route path="app" element={<AppLayout />}>
+
+          {/* Below are 4 child routes for the app path where index is the default child route for the parent  */}
+          <Route index element={<p>LIST</p>} />
+          <Route path="cities" element={<p>List of cities</p>} />
+          <Route path="countries" element={<p>List of countries</p>} />
+          <Route path="form" element={<p>Form</p>} />
+
+Then we have to use the <Outlet/> in the parent component file of the nested route
+NOTE:
+1.THIS IS SIMILAR TO CHILDREN PROP
+2.React router is very useful to show a tabbed component just like we used to display using useState hook in our previous projects
+
+
+
+
+//We can also send data to the next component i.e child via url
+ eg:   /cities data can be sent to new component i.e a particular city via /cities/id for that 
+
+steps:
+1.create a route :<Route path="cities/:id" element={<City />} />
+2.link that Route :<Link className={styles.cityItem} to={`${id}`}> This is to be written in parrent element
+3.read the state in url :const { id } = useParams(); thus we can use id any where which is passed by the parrent
+
+
+
+//Programmatic navigation is used when the user is to be redirected to a new link even if the user has not clicked on any link 
+eg:subbmition of form redirects on to new page for that eg: 
+const navigate=useNavigate()
+We cann also go backwards i.e go to parrent using useNavigate eg:
+Below we wrote  e.preventDefault(); because in original code the button is inside a form thus it reloads automatically 
+<Button
+          type="back"
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+          }}
+        >
+
+
+
+///For showing map we can youse react leaflet which we first have to install in our project by typing the command :
+npm i react-leaflet leaflet
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+   integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+   crossorigin=""></script> 
+   In react this is to be imported in the index.css file always whenever we use the leaflet
+
+
+
+
+///WHENEVER WE WANT TO SEND DATA TO AN API I.E WHENEVER WE WANT TO DO A POST REQUEST TO AN API WE DO IT AS BELOW EXAMPLE:
+async function createCity(newCity) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/cities`, {
+        method: "POST",
+        body: JSON.stringify(newCity),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await res.json();
+      
+    } catch {
+      alert("There was an error loading data...");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+
+
+  ///Watch the last 4 videos of context api section
