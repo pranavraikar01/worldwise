@@ -100,3 +100,26 @@ async function createCity(newCity) {
 
 
   ///Watch the last 4 videos of context api section
+ //App-v1.jsx is till context api section
+
+
+
+
+
+
+
+  ////While doing optimization the most imp thing to optimize is the bunddle size .Bundle is the javascript file which server sends to client when the client initially trys to reach our page thus this javscript file is a huge file thus it takes more time to load tis reduces the performance so the solution to this problem is code splitting in thus the server dont send an entire huge javascript file to the client whereas it sends small javascript files whenever they are needed and this process of sequentially loading small files is called lazy loading
+  most common practice is to split the bundle at the route level i.e at the page level thus we load the required page whenever needed this is done using lazy function in App.jsx
+  NOTE:TO CHECK HOW MANY BUNDLES ARE ThereIN THESYSTEM TYPE:npm run build in the terminal
+  SYNTAX TO CREATE SMALL BUNDLES:
+  
+  step1:
+  const Homepage = lazy(()=>import("./pages/Homepage")); thus dont put :-
+  import Homepage from "./pages/Homepage";
+
+
+  step2:
+  use supense so as to show loading of the above page eg:-
+  <Suspense fallback={<SpinnerFullPage />}> here SpinnerFullPage is the page to be put for loading 
+
+  NOTE:Lazy loading is not only done for routes it can be done for small components too
