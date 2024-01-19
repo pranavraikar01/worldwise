@@ -15,6 +15,8 @@ import SpinnerFullPage from "./components/SpinnerFullPage";
 // import AppLayout from "./pages/AppLayout";
 // import Login from "./pages/Login";
 const Homepage = lazy(() => import("./pages/Homepage"));
+const Map = lazy(() => import("./pages/Map"));
+
 const Product = lazy(() => import("./pages/Product"));
 const Pricing = lazy(() => import("./pages/Pricing"));
 const Login = lazy(() => import("./pages/Login"));
@@ -31,6 +33,7 @@ function App() {
               <Route path="/" element={<Homepage />} />
               <Route path="product" element={<Product />} />
               <Route path="pricing" element={<Pricing />} />
+              <Route path="map" element={<Map />} />
               <Route path="/login" element={<Login />} />
               <Route
                 path="app"

@@ -16,6 +16,7 @@ export function useGeolocation(defaultPosition = null) {
           lat: pos.coords.latitude,
           lng: pos.coords.longitude,
         });
+        console.log(position);
         setIsLoading(false);
       },
       (error) => {
